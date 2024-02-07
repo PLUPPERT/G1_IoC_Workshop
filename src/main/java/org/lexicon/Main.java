@@ -12,7 +12,7 @@ public class Main {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ComponentScanConfig.class);
         StudentDao studentDao = context.getBean(StudentDao.class);
         AnnotationConfigApplicationContext scannerContext = new AnnotationConfigApplicationContext(ScannerConfig.class);
-        UserInputService userInputService =context.getBean(UserInputService.class);
+        UserInputService userInputService =scannerContext.getBean(UserInputService.class);
 
 //        studentDao.save(new Student(1, "Mjau"));
         System.out.println(studentDao.find(1));
