@@ -18,7 +18,7 @@ public class StudentDaoListImpl implements StudentDao {
 
     @Override
     public List<Student> getAllStudents() {
-        return null;
+        return students;
     }
 
     @Override
@@ -39,6 +39,14 @@ public class StudentDaoListImpl implements StudentDao {
 
     @Override
     public void deleteStudent(int id) {
-
+        students.stream()
+                .filter(student -> student.getId() == id)
+                .findFirst().ifPresentOrElse(
+                        student -> {
+                            students.remove(student);
+                            System.out.println("Student with id '" + id + "' were successfully deleted");
+                        },
+                        () -> System.out.println("No student with id '" + id + "' were found."));
+        }
     }
-}
+
