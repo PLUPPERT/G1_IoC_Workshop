@@ -3,6 +3,7 @@ package org.lexicon;
 import org.lexicon.config.ComponentScanConfig;
 import org.lexicon.config.ScannerConfig;
 import org.lexicon.data_access.StudentDao;
+import org.lexicon.model.Student;
 import org.lexicon.service.UserInputService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,6 +13,9 @@ public class Main {
         StudentDao studentDao = context.getBean(StudentDao.class);
         AnnotationConfigApplicationContext scannerContext = new AnnotationConfigApplicationContext(ScannerConfig.class);
         UserInputService userInputService =context.getBean(UserInputService.class);
+
+//        studentDao.save(new Student(1, "Mjau"));
+        System.out.println(studentDao.find(1));
 
     }
 }
