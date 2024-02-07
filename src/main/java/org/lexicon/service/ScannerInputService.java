@@ -1,8 +1,5 @@
 package org.lexicon.service;
 
-
-// Todo Implement UserinputService
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,10 +15,10 @@ public class ScannerInputService implements UserInputService {
         this.scanner = scanner;
     }
 
-
     @Override
     public String getString() {
-        return null;
+        System.out.print("Enter student name: ");
+        return scanner.nextLine();
     }
 
     @Override

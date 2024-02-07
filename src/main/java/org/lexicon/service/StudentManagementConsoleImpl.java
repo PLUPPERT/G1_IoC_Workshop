@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+
 @Component
 public class StudentManagementConsoleImpl implements StudentManagement {
 
@@ -40,11 +42,19 @@ public class StudentManagementConsoleImpl implements StudentManagement {
 
     @Override
     public List<Student> findAll() {
-        return null;
+        return studentDao.getAllStudents();
     }
 
     @Override
     public Student edit(Student student) {
-        return null;
+        Optional<Student> optStudent = Optional.of(studentDao.find(student.getId()));
+
+        Student foundStudent = optStudent.orElse(null);
+
+        if (foundStudent == null) throw new IllegalArgumentException("No student with id '" + student.getId() + "' were found.");
+        
+        studentDao.updateStudent(foundStudent);
+
+        return foundStudent;
     }
 }
