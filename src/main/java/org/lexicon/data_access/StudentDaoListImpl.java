@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class StudentDaoListImpl implements StudentDao{
-    private List<Student> students = new ArrayList<>();
+public class StudentDaoListImpl implements StudentDao {
+    List<Student> students = new ArrayList<>();
 
     @Override
     public Student save(Student student) {
@@ -22,13 +22,19 @@ public class StudentDaoListImpl implements StudentDao{
     }
 
     @Override
-    public Student getStudentById(int id) {
-        return null;
+    public Student find(int id) {
+        return students.stream()
+                .filter(student -> student.getId() == id)
+                .findFirst().orElse(null);
     }
 
     @Override
     public void updateStudent(Student student) {
-
+        for(Student s : students){
+            if (s.getId()==student.getId()){
+                s.setName(student.getName());
+            }
+        }
     }
 
     @Override

@@ -22,22 +22,41 @@ public class StudentManagementConsoleImpl implements StudentManagement {
 
     @Override
     public Student create() {
-        return null;
+        String name;
+        int id;
+        System.out.println("Create a new Student");
+        // System.out.print("Enter the Student id: ");
+        id = scannerService.getInt();
+        //System.out.println("Enter student name: ");
+        name = scannerService.getString();
+        Student newStudent = new Student(id, name);
+        return studentDao.save(newStudent);
     }
 
     @Override
     public Student save(Student student) {
-        return null;
+        return studentDao.save(student);
     }
 
     @Override
     public Student find(int id) {
-        return null;
+        return studentDao.find(id);
     }
 
     @Override
     public Student remove(int id) {
-        return null;
+        Optional<Student> optStudent = Optional.of(studentDao.find(id));
+
+        optStudent.ifPresentOrElse(
+                student -> {
+                    studentDao.deleteStudent(id);
+                },
+                () -> {
+                    throw new IllegalArgumentException("No student with id '" + id + "' were found.");
+                }
+        );
+
+        return optStudent.get();
     }
 
     @Override

@@ -23,6 +23,7 @@ public class ScannerInputService implements UserInputService {
 
     @Override
     public int getInt() {
-        return 0;
+        System.out.println("Enter student id:");
+        return scanner.nextInt();
     }
 }
